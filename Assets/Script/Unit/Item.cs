@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Item 
 {
-    [SerializeField]private StatInfo statInfo;
+    #region 무기 스탯
+
+    #endregion
 }
