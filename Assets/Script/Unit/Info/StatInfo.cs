@@ -98,8 +98,12 @@ public class StatInfo
         /// 마법 방어력
         /// </summary>
         public int magic_Defence;
+        /// <summary>
+        /// 종합 방어력
+        /// </summary>
+        public int total_Defence;
 
-        public void GetData(int hp, int mp, int hg, int mg, int pAp, int mAp, int pDef, int mDef, int ch, int cm)
+        public void GetData(int hp, int mp, int hg, int mg, int pAp, int mAp, int pDef, int mDef,int tDef, int ch, int cm)
         {
             max_Hp = hp;
             max_mp = mp;
@@ -109,6 +113,7 @@ public class StatInfo
             magic_AattckPoint = mAp;
             physics_Defence = pDef;
             magic_Defence = mDef;
+            total_Defence = tDef;
             cur_Hp = ch;
             cur_mp = cm;
         }
@@ -178,14 +183,14 @@ public class StatInfo
         }
     }
 
-    public void SettingStat(int i)
+    /*
+     public void SettingStat(int i)
     {
         var SaveData_Char = CSVReader.Read("Data/CharData/SaveData_Char");
         var Coefficient_Char = CSVReader.Read("Data/CharData/Coefficient_Char");
         var Stat_Char = CSVReader.Read("Data/CharData/Stat_Char");
 
         int 레벨, 현재경험치, 체력, 마나, 체력회복, 마나회복, 공격력, 마력, 물방, 마방, 현재체력, 현재마나, 행동력, 회피, 명중, 힘, 민첩, 지능, 스피드;
-       
         
         레벨 = Convert.ToInt32(SaveData_Char[i]["레벨"]);
         현재경험치 = Convert.ToInt32(SaveData_Char[i]["현재경험치"]);
@@ -233,6 +238,65 @@ public class StatInfo
         growthInfo.GetData(힘최종, 민첩최종, 지능최종, 스피드);
 
         Debug.Log("포팅완료");
+    }
+     
+     */
+
+
+
+    public void SettingStat(int i)
+    {
+        var SaveData_Char = CSVReader.Read("Data/CharData/SaveData_Char");
+        var Coefficient_Char = CSVReader.Read("Data/CharData/Coefficient_Char");
+        var Stat_Char = CSVReader.Read("Data/CharData/Stat_Char");
+
+        int level, currentExp, health, mana, healthRecovery, manaRecovery, attackPower, magicPower, physicalDefense, magicalDefense, totalDefence, currentHealth, currentMana, actionPoints, evasion, accuracy, strength, agility, intelligence, speed;
+
+        level = Convert.ToInt32(SaveData_Char[i]["레벨"]);
+        currentExp = Convert.ToInt32(SaveData_Char[i]["현재경험치"]);
+        currentHealth = Convert.ToInt32(SaveData_Char[i]["현재체력"]);
+        currentMana = Convert.ToInt32(SaveData_Char[i]["현재마나"]);
+
+        health = Convert.ToInt32(Stat_Char[i]["체력"]);
+        mana = Convert.ToInt32(Stat_Char[i]["마나"]);
+        healthRecovery = Convert.ToInt32(Stat_Char[i]["체력회복"]);
+        manaRecovery = Convert.ToInt32(Stat_Char[i]["마나회복"]);
+        attackPower = Convert.ToInt32(Stat_Char[i]["공격력"]);
+        magicPower = Convert.ToInt32(Stat_Char[i]["마력"]);
+        physicalDefense = Convert.ToInt32(Stat_Char[i]["물방"]);
+        magicalDefense = Convert.ToInt32(Stat_Char[i]["마방"]);
+        totalDefence = Convert.ToInt32(Stat_Char[i]["종방"]);
+
+        actionPoints = Convert.ToInt32(Stat_Char[i]["행동력"]);
+        evasion = Convert.ToInt32(Stat_Char[i]["회피"]);
+        accuracy = Convert.ToInt32(Stat_Char[i]["명중"]);
+
+        strength = Convert.ToInt32(Stat_Char[i]["힘"]);
+        agility = Convert.ToInt32(Stat_Char[i]["민첩"]);
+        intelligence = Convert.ToInt32(Stat_Char[i]["지능"]);
+        speed = Convert.ToInt32(Stat_Char[i]["스피드"]);
+
+        int strengthCoefficient, agilityCoefficient, intelligenceCoefficient, healthCoefficient, manaCoefficient;
+        strengthCoefficient = Convert.ToInt32(Coefficient_Char[i]["힘계수"]);
+        agilityCoefficient = Convert.ToInt32(Coefficient_Char[i]["민첩계수"]);
+        intelligenceCoefficient = Convert.ToInt32(Coefficient_Char[i]["지능계수"]);
+        healthCoefficient = Convert.ToInt32(Coefficient_Char[i]["체력계수"]);
+        manaCoefficient = Convert.ToInt32(Coefficient_Char[i]["마나계수"]);
+
+        int finalStrength, finalAgility, finalIntelligence, finalHealth, finalMana;
+        finalStrength = LvCol(level, strength, strengthCoefficient);
+        finalAgility = LvCol(level, agility, agilityCoefficient);
+        finalIntelligence = LvCol(level, intelligence, intelligenceCoefficient);
+        finalHealth = LvCol(level, health, healthCoefficient);
+        finalMana = LvCol(level, mana, manaCoefficient);
+
+        levelInfo.GetData(level, currentExp);
+        battleInfo.GetData(finalHealth, finalMana, healthRecovery, manaRecovery, attackPower, magicPower, physicalDefense, magicalDefense, totalDefence, currentHealth, currentMana);
+        turnInfo.GetData(actionPoints);
+        hitInfo.GetData(evasion, accuracy);
+        growthInfo.GetData(finalStrength, finalAgility, finalIntelligence, speed);
+
+        Debug.Log("Porting completed");
     }
     private int LvCol(int lv, int start, int Coef)
     {
