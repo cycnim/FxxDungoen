@@ -5,6 +5,5 @@ using UnityEngine;
 public class Item 
 {
     #region 무기 스탯
-
     #endregion
 }

@@ -25,7 +25,7 @@ public class ProductionPanel : MonoBehaviour
     Color color = new Color(0, 0, 0, 1);
     float size = 0;
 
-    //±âÁØÁ¡ÀÌ µÇ´Â x, y ÁÂÇ¥°ª
+    //ê¸°ì¤€ì ì´ ë˜ëŠ” x, y ì¢Œí‘œê°’
     
 
     void Start()
@@ -120,7 +120,7 @@ public class ProductionPanel : MonoBehaviour
 
 
     /// <summary>
-    /// ÇÑÂÊ¹æÇâ Ä¿ÅÙ ÃÑ6°¡Áö µÊ
+    /// í•œìª½ë°©í–¥ ì»¤í… ì´6ê°€ì§€ ë¨
     /// </summary>
     public IEnumerator FillAmount(int start, int end, Image.FillMethod fillMethod)
     {
@@ -169,7 +169,7 @@ public class ProductionPanel : MonoBehaviour
         }
     }
     /// <summary>
-    /// ÆäÀÌµåÀÎ¾Æ¿ô
+    /// í˜ì´ë“œì¸ì•„ì›ƒ
     /// </summary>
     public IEnumerator FadeAmount()
     {
