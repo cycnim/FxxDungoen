@@ -17,4 +17,12 @@ public class Monster : Unit
         }
 
     }
+
+    /// <summary>
+    /// 랜덤으로 플레이어를 타겟으로 잡음
+    /// </summary>
+    public void TargetTraking(Player player)
+    {
+        Target = player;
+    }
 }
