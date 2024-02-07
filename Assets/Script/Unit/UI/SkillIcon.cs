@@ -13,6 +13,6 @@ public class SkillIcon : MonoBehaviour
     {
         image = skillInfo.image;
         cost = skillInfo.cost;
-        type = skillInfo.type;
+        //type = skillInfo.type;
     }
 }

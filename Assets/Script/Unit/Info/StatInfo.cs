@@ -14,6 +14,7 @@ public class StatInfo
     public TurnInfo turnInfo;
     public HitInfo hitInfo;
     public GrowthInfo growthInfo;
+    public SkillSlotInfo skills;
     #endregion
 
     [Serializable]
@@ -186,6 +187,11 @@ public class StatInfo
         }
     }
 
+    [Serializable]
+    public struct SkillSlotInfo
+    {
+        public List<SkillInfo> skillInfos;
+    }
     /*
      public void SettingStat(int i)
     {
@@ -252,24 +258,29 @@ public class StatInfo
     /// <param name="i"></param>
     public void SettingStat_Char(int i)
     {
+        // Todo : 24-02-07 나중에 로드데이터 완공 끝나면 그거에 맞게 코드 바꿔주기
+
         i++;
         //시트 데이터 불러오기
         var SaveData_Char = CSVReader.Read("Data/CharData/SaveData_Char");
-        var Coefficient_Char = CSVReader.Read("Data/CharData/Coefficient_Char");
         var Stat_Char = CSVReader.Read("Data/CharData/Stat_Char");
+        var Coefficient_Char = CSVReader.Read("Data/CharData/Coefficient_Char");
 
         //불러온 시트에 마춰 데이터 세팅
         unitName = Stat_Char[i]["이름"].ToString();
         //기본 스탯 데이터
         int level, currentExp, health, mana, healthRecovery, manaRecovery, attackPower, magicPower, physicalDefense, magicalDefense, totalDefence, currentHealth, currentMana, actionPoints, evasion, accuracy, strength, agility, intelligence, speed;
-        
+
+        #region SaveData_Char 데이터 삽입
 
         level = Convert.ToInt32(SaveData_Char[i]["레벨"]);
         currentExp = Convert.ToInt32(SaveData_Char[i]["현재경험치"]);
         currentHealth = Convert.ToInt32(SaveData_Char[i]["현재체력"]);
         currentMana = Convert.ToInt32(SaveData_Char[i]["현재마나"]);
+        #endregion
 
-        
+        #region Stat_Char 데이터 삽입
+
         health = Convert.ToInt32(Stat_Char[i]["체력"]);
         mana = Convert.ToInt32(Stat_Char[i]["마나"]);
         healthRecovery = Convert.ToInt32(Stat_Char[i]["체력회복"]);
@@ -288,7 +299,9 @@ public class StatInfo
         agility = Convert.ToInt32(Stat_Char[i]["민첩"]);
         intelligence = Convert.ToInt32(Stat_Char[i]["지능"]);
         speed = Convert.ToInt32(Stat_Char[i]["스피드"]);
-        
+        #endregion
+
+        #region Coefficient_Char 데이터 삽입
 
         //계수 데이터
         int strengthCoefficient, agilityCoefficient, intelligenceCoefficient, healthCoefficient, manaCoefficient;
@@ -297,21 +310,36 @@ public class StatInfo
         intelligenceCoefficient = Convert.ToInt32(Coefficient_Char[i]["지능계수"]);
         healthCoefficient = Convert.ToInt32(Coefficient_Char[i]["체력계수"]);
         manaCoefficient = Convert.ToInt32(Coefficient_Char[i]["마나계수"]);
+        #endregion
 
-        //레벨에 따른 계수 세팅
+        #region 레벨에 따른 계수 세팅
         int finalStrength, finalAgility, finalIntelligence, finalHealth, finalMana;
         finalStrength = LvCol(level, strength, strengthCoefficient);
         finalAgility = LvCol(level, agility, agilityCoefficient);
         finalIntelligence = LvCol(level, intelligence, intelligenceCoefficient);
         finalHealth = LvCol(level, health, healthCoefficient);
         finalMana = LvCol(level, mana, manaCoefficient);
+        #endregion
 
-        //계산 및 정렬된 데이터 기반으로 데이터 삽입
+        #region 계산 및 정렬된 데이터 기반으로 데이터 삽입
         levelInfo.GetData(level, currentExp);
         battleInfo.GetData(finalHealth, finalMana, healthRecovery, manaRecovery, attackPower, magicPower, physicalDefense, magicalDefense, totalDefence, currentHealth, currentMana);
         turnInfo.GetData(actionPoints);
         hitInfo.GetData(evasion, accuracy);
         growthInfo.GetData(finalStrength, finalAgility, finalIntelligence, speed);
+        #endregion
+
+        #region 스킬 데이터 클래스 생성 (임시)
+
+        skills.skillInfos = new List<SkillInfo>();
+        for (int iStart = 1; iStart < 5 ; iStart++)
+        {
+            var 스킬응애 = SaveData_Char[i]["스킬" + iStart].ToString();
+            SkillInfo skill = new SkillInfo(스킬응애);
+            skills.skillInfos.Add(skill);
+        }
+        
+        #endregion
 
         Debug.Log("Porting completed");
     }

@@ -318,6 +318,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 457327259}
   forceType: 0
   attackOrder: 0
@@ -394,6 +396,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 1567496482}
   forceType: 1
   attackOrder: 0
@@ -528,6 +532,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 457327259}
   forceType: 0
   attackOrder: 0
@@ -589,6 +595,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 1567496482}
   forceType: 1
   attackOrder: 0
@@ -1338,6 +1346,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 1567496482}
   forceType: 1
   attackOrder: 0
@@ -1414,6 +1424,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 457327259}
   forceType: 0
   attackOrder: 0
@@ -1570,6 +1582,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 457327259}
   forceType: 0
   attackOrder: 0
@@ -1791,6 +1805,8 @@ MonoBehaviour:
       dex: 0
       magic: 0
       speed: 0
+    skills:
+      skillInfos: []
   target: {fileID: 1567496482}
   forceType: 1
   attackOrder: 0

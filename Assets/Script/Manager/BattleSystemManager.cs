@@ -46,7 +46,7 @@ public class BattleSystemManager : MonoBehaviour
                 if (OrderedUnitsByAttack[now].ForceType == Unit.Force.Player) //플레이어
                 {
                     battlStart = true;
-                    BattleChoice(OrderedUnitsByAttack[now]);
+                    //BattleChoice(OrderedUnitsByAttack[now]);
                     Debug.Log("루프 멈춰야됨");
                 }
                 else //몬스터
@@ -99,7 +99,7 @@ public class BattleSystemManager : MonoBehaviour
         OrderedUnitsByAttack = OrderedUnitsByAttack.OrderByDescending(item => item.ForceType).ToList(); //세력에 마춰서 2차 가공 정렬
         OrderedUnitsByAttack = unit.OrderByDescending(item => item.StatInfo.growthInfo.speed).ToList(); //스피드에 마춰서 정렬 
 
-        //unit.//저장된 데이터 스킬 뿌리기 (임시)
+        //unit.  //저장된 데이터 스킬 뿌리기 (임시)
 
 
         //정렬코드 미완이고 나중에 만들땐 함수화 시켜서 반환 형식으로 해줘야됨

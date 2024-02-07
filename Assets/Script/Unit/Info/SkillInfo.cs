@@ -1,29 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
 /// 테스용 스킬 정보 클래스
 /// </summary>
-public class SkillInfo 
+[System.Serializable]
+public class SkillInfo
 {
+    
     public Image image;
     public int cost;
-    public string type;
-}
+    public string skillName;
+    //SkillIcon.
 
-
-    /*
-     
-    /// <summary>
-    /// 스킬 불러오기 
-    /// </summary>
-    public void GetSkill()
+    public SkillInfo(string type)
     {
 
     }
-     
-     
+
+    /*
+        MethodInfo methodInfo = typeof(SkillInfo).GetMethod("Skill_" + type.ToString(), BindingFlags.NonPublic | BindingFlags.Instance);
+        if(methodInfo != null)
+        {
+            methodInfo.Invoke(this, null);
+        }
      
      */
+
+
+}
