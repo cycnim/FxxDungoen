@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 [Serializable]
 public class StatInfo
@@ -336,6 +337,23 @@ public class StatInfo
         {
             var 스킬응애 = SaveData_Char[i]["스킬" + iStart].ToString();
             SkillInfo skill = new SkillInfo(스킬응애);
+            skill.skillID = Convert.ToInt32(SaveData_Char[i]["스킬" + iStart].ToString());
+            string temp = "";
+            for (int index = 0; index < LoadManager.SkillData.Count; index++)
+            {
+                //Debug.Log("dd" + index);
+                Debug.Log(LoadManager.SkillData[index]["이미지"]);
+                if((int)LoadManager.SkillData[index]["ID"] == skill.skillID)
+                {
+                    string 이미지경로 = (string)LoadManager.SkillData[i]["이미지"];
+                    skill.image = Resources.Load<Sprite>("Image/SkillIcon/" + 이미지경로);
+                    skill.skillName = (string)LoadManager.SkillData[i]["한글명"];
+                    skill.cost = (int)LoadManager.SkillData[i]["코스트"];
+                }
+            }
+
+            //var asd = LoadManager.SkillData.Where(i => i == skill.skillID);
+            //skill.cost = Convert.ToInt32();
             skills.skillInfos.Add(skill);
         }
         

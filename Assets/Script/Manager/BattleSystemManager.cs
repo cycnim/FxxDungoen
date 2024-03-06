@@ -14,6 +14,8 @@ public class BattleSystemManager : MonoBehaviour
 
     [SerializeField] private bool battlStart = false;
 
+    [SerializeField] private Unit nowUnit;
+
     //public Image 
     public List<SkillIcon> skillIcons = new List<SkillIcon>();
     private void Update()
@@ -32,6 +34,11 @@ public class BattleSystemManager : MonoBehaviour
     {
         StartCoroutine(BattleLogic());
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator BattleLogic()
     {
         StartDataSetting();
@@ -46,7 +53,9 @@ public class BattleSystemManager : MonoBehaviour
                 if (OrderedUnitsByAttack[now].ForceType == Unit.Force.Player) //플레이어
                 {
                     battlStart = true;
-                    //BattleChoice(OrderedUnitsByAttack[now]);
+                    //nowUnit = OrderedUnitsByAttack[now];
+
+                    //24-03-06 -> 이후로 작업해줘야됨 뭘작업할지는 본인이 알아서 잘 생각하도록
                     Debug.Log("루프 멈춰야됨");
                 }
                 else //몬스터
@@ -72,6 +81,11 @@ public class BattleSystemManager : MonoBehaviour
         return units[point];
     }
 
+    /// <summary>
+    /// 이거 왜만든지 모르겠음
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="player"></param>
     private void BattleChoice<T>(T player) where T : Unit
     {
         player.SkillIconUISetting(skillIcons);
@@ -82,11 +96,12 @@ public class BattleSystemManager : MonoBehaviour
     /// </summary>
     public void StartDataSetting()
     {
+        //캐릭터 세팅
         for (int i = 0; i < players.Length; i++)
         {
             players[i].StatInfo.SettingStat_Char(i);
         }
-
+        //몬스터 데이터 세팅
         for (int i = 0; i < monsters.Length; i++)
         {
             monsters[i].StatInfo.SettingStat_Monster(i);

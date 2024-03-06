@@ -10,10 +10,10 @@ using UnityEngine.UI;
 [System.Serializable]
 public class SkillInfo
 {
-    
-    public Image image;
+    public Sprite image;
     public int cost;
     public string skillName;
+    public int skillID;
     //SkillIcon.
 
     public SkillInfo(string type)
@@ -29,6 +29,5 @@ public class SkillInfo
         }
      
      */
-
 
 }

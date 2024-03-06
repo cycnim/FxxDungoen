@@ -43,17 +43,17 @@ public class Unit : MonoBehaviour
     public void SkillIconUISetting(List<SkillIcon> skillIcon)
     {
         //skillIcon.ForEach((icon, index) => icon.SetSkillData(skillInfos[index]));
-        
+
         //Enumerable.Range(0, Mathf.Min(skillIcon.Count, skillInfos.Length))
         //.ToList()
         //.ForEach(i => skillIcon[i].SetSkillData(skillInfos[i]));
 
         // vs 
-
-        for (int i = 0; i < skillInfos.Length; i++)
-        {
-            skillIcon[i].SetSkillData(skillInfos[i]);
-        }
+        //Debug.Log("수우킬 랭수"+skillInfos.Length);
+        //for (int i = 0; i < skillInfos.Length; i++)
+        //{
+        //    //skillIcon[i].SetSkillData(skillInfos[i]);
+        //}
 
     }
 
